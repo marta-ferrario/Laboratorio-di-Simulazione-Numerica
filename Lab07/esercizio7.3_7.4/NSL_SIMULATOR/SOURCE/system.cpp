@@ -649,6 +649,7 @@ void System :: averages(int blk){
   _average     = _block_av / double(_nsteps);
   _global_av  += _average;
   _global_av2 += _average % _average; // % -> element-wise multiplication
+  // test
 
   // POTENTIAL ENERGY //////////////////////////////////////////////////////////
   if (_measure_penergy){

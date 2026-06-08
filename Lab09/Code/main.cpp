@@ -59,9 +59,9 @@ int main (){
      
     for(int gen=0; gen<n_gen; gen++) {
         GA_c.Evolve(rnd);
-        out_loss_c << gen << " " << GA_c.GetBest().GetFitness() << endl;
-        out_check_c << gen << " " << GA_c.GetBest().Check() << endl; 
-        out_ave_c << gen << " " << GA_c.GetBestHalfAverage() << endl; 
+        out_loss_c << gen << " " << GA_c.GetBest().GetFitness() << endl; // stampa della lunghezza del miglior percorso
+        out_check_c << gen << " " << GA_c.GetBest().Check() << endl;  // stampa 1 se tutto ok
+        out_ave_c << gen << " " << GA_c.GetBestHalfAverage() << endl; // stampa la lunghezza media della migliore metà dei percorsi
     }
 
     ofstream out_path_c ("../Output/best_path_c.dat");
@@ -69,15 +69,15 @@ int main (){
     vector<int> best_path_c = best_ind_c.GetPath(); 
     for(int i=0; i<n_cities; i++){
         int c = best_path_c[i]; 
-        out_path_c  << c << " " << cities_c[c].GetX() << " " << cities_c[c].GetY() << endl; 
+        out_path_c  << c << " " << cities_c[c].GetX() << " " << cities_c[c].GetY() << endl;  // stampa del miglior percorso (coordinate delle città)
     }
 
-    int c0_c = best_path_c[0]; // stampo alla fine la prima città per chiudere il tour
+    int c0_c = best_path_c[0]; // stampa alla fine la prima città per chiudere il tour
     out_path_c << "1" << " " << cities_c[c0_c].GetX() << " " << cities_c[c0_c].GetY() << endl;
 
 
 
-    // CITTÀ DEL QUADRATO
+    // CITTÀ NEL QUADRATO
     vector<City> cities;
     for(int i=0; i<n_cities; i++) {
         double x = rnd.Rannyu();

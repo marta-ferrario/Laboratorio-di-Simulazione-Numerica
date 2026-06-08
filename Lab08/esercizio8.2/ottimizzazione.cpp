@@ -37,7 +37,7 @@ int main () {
     ofstream out_param("OUTPUT/SA_param.dat"); 
     double E_old=ave_energy(mu, sigma, rnd); 
     for(int t=0; t<70; t++){
-        for (int i=0; i<300; i++){
+        for (int i=0; i<50; i++){
             double mu_new = mu + rnd.Rannyu(-delta_mu, delta_mu); 
             double sigma_new = sigma + rnd.Rannyu(-delta_sigma, delta_sigma); 
 

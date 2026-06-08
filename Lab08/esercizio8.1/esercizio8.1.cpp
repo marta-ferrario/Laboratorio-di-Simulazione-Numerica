@@ -60,7 +60,6 @@ int main () {
     // DETERMINAZIONE DI DELTA
     // check_acc(mu, sigma, rnd, Delta); 
     
-
     // DATA BLOCKING
     ofstream out("data.dat"); 
     double sum_ave=0; 

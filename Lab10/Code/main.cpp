@@ -19,7 +19,7 @@ vector<City> ReadCities(const string& filename);
 int main (int argc, char* argv[]){
     MPI_Init(&argc, &argv);
 
-    bool use_migration = true;
+    bool use_migration = true; // variabile boolena per atiivare/disattivare le migrazioni
 
     int rank; // ID del continente
     int size; // numero totale di continenti
@@ -64,7 +64,6 @@ int main (int argc, char* argv[]){
 
     GeneticAlgorithm GA(pop_size, n_cities, cities, rnd);
 
-
     ofstream out;
     if(use_migration){
         out.open("../Output/With_migration/best_rank_" +
@@ -76,14 +75,13 @@ int main (int argc, char* argv[]){
     
     for(int gen=0; gen<n_gen; gen++) {
         GA.Evolve(rnd);
-
-            out << gen << " " << GA.GetBest().GetFitness() << endl;
+        out << gen << " " << GA.GetBest().GetFitness() << endl;
 
         if (use_migration && gen > 0 && gen % N_migr == 0) {
             int pair[2];
 
 
-            // Solo rank 0 sceglie la coppia
+            // Solo rank 0 sceglie la coppia che scambia gli individui
             if (rank == 0) {
                 do {
                     pair[0] = (int)rnd.Rannyu(0, size);
@@ -132,24 +130,20 @@ int main (int argc, char* argv[]){
                 to_string(rank) + ".dat");
     }
     Individual best = GA.GetBest();
-    
     for(int i=0;i<n_cities;i++){
         int city = best.GetPath()[i];
-        path << cities[city].GetX() << " "
-            << cities[city].GetY() << endl;
+        path << cities[city].GetX() << " " << cities[city].GetY() << endl; // stampa delle coordinate delle città del miglior percorso
     
     }
 
-    if(rank == 0){
-    Individual best = GA.GetBest();
-    ofstream out_sing("best_global.dat");
+    // if(rank == 0){
+    //     Individual best = GA.GetBest();
+    //     ofstream out_sing("best_global.dat");
 
-    for(int i : best.GetPath()){
-        out_sing << cities[i].GetX() << " "
-            << cities[i].GetY()
-            << endl;
-    }
-    }
+    //     for(int i : best.GetPath()){
+    //         out_sing << cities[i].GetX() << " " << cities[i].GetY() << endl;
+    //     }
+    // }
 
 
     MPI_Finalize();

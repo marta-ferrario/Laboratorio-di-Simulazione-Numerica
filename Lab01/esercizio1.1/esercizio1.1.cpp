@@ -15,10 +15,9 @@ int main () {
    int L = M/N; //numero di lanci per blocco
 
 
-   double block_avg[N];
-   double block_avg2[N];
-   double average[N];
-   double error[N];
+   double average;
+   double ave2; 
+   double error;
    double sum_prog = 0;
    double sum2_prog = 0;
 
@@ -58,16 +57,16 @@ int main () {
       double media = sum / L;
       double media2 = media * media;
 
-      block_avg[j]  = media;
-      block_avg2[j] = media2;
-      sum_prog  += block_avg[j];
-      sum2_prog += block_avg2[j];
+      sum_prog  += media;
+      sum2_prog += media2;
 
-      average[j] = sum_prog / (j + 1);
-      error[j] = err_stat(average[j], sum2_prog / (j + 1), j + 1);
+      average = sum_prog / (j + 1);
+      ave2 = sum2_prog / (j + 1); 
+      error = err_stat(average, ave2, j + 1);
 
-      out << (j+1)*L << " " << average[j] << " " << error[j] << endl;
+      out << (j+1)*L << " " << average << " " << error << endl;
    }
+   out.close();
 
 
 
@@ -85,21 +84,20 @@ int main () {
       double media = sum / L;
       double media2 = media * media;
 
-      block_avg[j]  = media;
-      block_avg2[j] = media2;
-      sum_prog  += block_avg[j];
-      sum2_prog += block_avg2[j];
+      sum_prog  += media;
+      sum2_prog += media2;
 
-      average[j] = sum_prog / (j + 1);
-      error[j] = err_stat(average[j], sum2_prog / (j + 1), j + 1);
+      average = sum_prog / (j + 1);
+      ave2 = sum2_prog / (j + 1); 
+      error = err_stat(average, ave2, j + 1);
 
-      out2 << (j+1)*L << " " << average[j] << " " << error[j] << endl;
+      out2 << (j+1)*L << " " << average << " " << error << endl;
    }
    out2.close(); 
 
 
 
-   // TEST DEL CHI QUADRO
+   // ESERCIZIO 1.1.3: TEST DEL CHI QUADRO
    int intervalli=100;
    int contatori[intervalli]; 
    int estrazioni = 10000; 
